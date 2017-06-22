@@ -26,6 +26,7 @@
 </template>
 <script>
     import http from '../methods/methods'
+    import path from 'path'
     export default{
         data(){
             let validation = (rule, value, callback) => {
@@ -70,6 +71,7 @@
                         console.log(http);
                         http('GET','http://47.94.197.184:3000/api/novel',this.novelForm).then((res)=>{
                             console.log(res);
+                            location.href = path.join('http://47.94.197.184:3000', res.href)
                         })
                     } else {
                         console.log('error submit!!');

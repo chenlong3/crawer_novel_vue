@@ -3,6 +3,9 @@
  */
 function http(type,url,data){
     return new Promise(function(resolve,reject){
+        if(type === 'GET'){
+
+        }
         let xhr = new XMLHttpRequest();
         xhr.open(type||'GET',url,true);
         xhr.onreadystatechange=function(){
