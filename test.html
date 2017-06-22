@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link href="https://cdn.quilljs.com/1.2.4/quill.snow.css" rel="stylesheet">
+
+<!-- Create the editor container -->
+<div id="editor-container"></div>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.2.4/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+    var IMGUR_CLIENT_ID = 'bcab3ce060640ba';
+    var IMGUR_API_URL = 'https://api.imgur.com/3/image';
+
+    function imageHandler(image, callback) {
+        console.log(image)
+        var data = new FormData();
+        data.append('image', image);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', IMGUR_API_URL, true);
+        xhr.setRequestHeader('Authorization', 'Client-ID ' + IMGUR_CLIENT_ID);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 200 && response.success) {
+                    callback(response.data.link);
+                } else {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        callback(e.target.result);
+                    };
+                    reader.readAsDataURL(image);
+                }
+            }
+        }
+        xhr.send(data);
+    }
+
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar:[
+                'image'
+            ]
+        },
+        placeholder: 'Insert an image...',
+        theme: 'snow',
+        imageHandler: imageHandler
+    });
+
+</script>
+</body>
+</html>
