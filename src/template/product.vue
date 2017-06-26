@@ -68,8 +68,9 @@
             onSubmit(fromName){
                 this.$refs[fromName].validate((valid) => {
                     if (valid) {
-                        console.log(http);
-                        http('GET','http://47.94.197.184:3000/api/novel',this.novelForm).then((res)=>{
+                        let data = {};
+                        Object.keys(this.novelForm).forEach((item)=>{this.novelForm[item]&&(data[item]=this.novelForm[item])});
+                        http('GET','http://47.94.197.184:3000/api/novel',data).then((res)=>{
                             console.log(res);
                             location.href = path.join('http://47.94.197.184:3000', res.href)
                         })
