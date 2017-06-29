@@ -4,7 +4,7 @@
 function http(type,url,data){
     return new Promise(function(resolve,reject){
         if(type === 'GET'){
-            Object.keys(data).forEach((item,index)=>{
+            data&&Object.keys(data).forEach((item,index)=>{
                 if(index===0){
                     url += '?' + item + '=' + data[item]
                 }else{
@@ -14,17 +14,18 @@ function http(type,url,data){
         }
         let xhr = new XMLHttpRequest();
         xhr.open(type||'GET',url,true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhr.onreadystatechange=function(){
             if (xhr.readyState === 4) {
                 let ready = JSON.parse(xhr.responseText);
-                if (ready.status === 200) {
+                if (xhr.status === 200) {
                     resolve(ready)
                 } else {
                     reject(ready)
                 }
             }
         };
-        xhr.send(data)
+        xhr.send(JSON.stringify(data))
     })
 }
 export default http

@@ -6,7 +6,8 @@
             </el-menu>
             <el-menu class="menu-left" @open="handleOpen" @close="handleClose" theme="dark" :default-active="$route.path" :router='true'>
                 <el-menu-item-group title="文章管理">
-                    <el-menu-item index="/admin"><i class="el-icon-document"></i>小说管理</el-menu-item>
+                    <el-menu-item index="/admin"><i class="el-icon-document"></i>网站管理</el-menu-item>
+                    <el-menu-item index="/admin/novel"><i class="el-icon-document"></i>小说管理</el-menu-item>
                     <el-menu-item index="/admin/article"><i class="el-icon-document"></i>vue封装quill</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group title="用户管理">
