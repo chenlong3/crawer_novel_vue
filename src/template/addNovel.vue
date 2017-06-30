@@ -7,9 +7,9 @@
                         <el-select v-model="novelForm.websiteId" placeholder="请选择">
                             <el-option
                                     v-for="item in websiteList"
-                                    :key="item._id"
+                                    :key="item.id"
                                     :label="item.name"
-                                    :value="item._id">
+                                    :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -21,7 +21,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit('novelForm')">保存</el-button>
-                        <el-button>取消</el-button>
+                        <el-button @click="back()">取消</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -53,7 +53,11 @@
             }
         },
         methods:{
+            back(){
+                this.$router.go(-1)
+            },
             onSubmit(fromName){
+                console.log(this.novelForm);
                 this.$refs[fromName].validate((valid) => {
                     if (valid) {
                         let data = {};
@@ -73,9 +77,10 @@
         },
         created(){
             let id = this.$route.params.id;
-            if(id){
+            if(id&&id!=='add'){
                 http.getNovel('',id).then((res)=>{
-
+                    let data = res.data;
+                    data&&(this.novelForm = data)
                 })
             }
             http.getWebsite().then((res)=>{

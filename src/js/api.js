@@ -4,8 +4,8 @@
 import http from './methods'
 import {NOVELAPI,WEBSITEAPI} from './constant'
 export default {
-    getNovel:function(data){
-        return http('GET',NOVELAPI,data)
+    getNovel:function(data,id){
+        return http('GET',NOVELAPI+(id||''),data)
     },
     addNovel:function(data){
         return http('POST',NOVELAPI,data)

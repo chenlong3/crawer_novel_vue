@@ -17,7 +17,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit('websiteForm')">保存</el-button>
-                        <el-button>取消</el-button>
+                        <el-button @click="back()">取消</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -52,6 +52,9 @@
             }
         },
         methods:{
+            back(){
+                this.$router.go(-1)
+            },
             onSubmit(fromName){
                 this.$refs[fromName].validate((valid) => {
                     if (valid) {

@@ -10,12 +10,16 @@
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="路径"
-                    label="path">
+                    prop="path"
+                    label="路径">
             </el-table-column>
             <el-table-column
-                    prop="是否生成"
-                    label="isFull">
+                    prop="isFull"
+                    label="是否生成">
+            </el-table-column>
+            <el-table-column
+                    prop="upDateAt"
+                    label="更新时间">
             </el-table-column>
             <el-table-column label="操作">
                 <template scope="scope">
@@ -41,11 +45,13 @@
         },
         methods:{
             handleDelete(id){
-                this.request()
+                http.delNovel(id).then(()=>{
+                    this.request()
+                })
             },
             request(){
                 http.getNovel().then((res) => {
-                    //this.tableData = res.data
+                    this.tableData = res.data
                 })
             }
         },

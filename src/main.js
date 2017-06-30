@@ -1,4 +1,4 @@
-import Vue from './js/directive'
+import Vue from './js/component'
 import VueRouter from 'vue-router'
 import ElementUi from 'element-ui'
 import router from './js/router'

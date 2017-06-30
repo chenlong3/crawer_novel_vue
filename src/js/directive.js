@@ -1,7 +1,7 @@
 /**
  * Created by cl on 2017/6/29.
  */
-import Vue from 'vue'
+import Vue from './filter'
 import Quill from 'quill'
 
 Vue.directive('editor', {
