@@ -30,6 +30,9 @@
                             size="small"
                             type="danger"
                             @click="handleDelete(scope.row.id)">删除</el-button>
+                    <el-button
+                            size="small"
+                            @click="download(scope.row.hash)">下载</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -37,6 +40,7 @@
 </template>
 <script>
     import http from '../js/api'
+    import {DOWNAPI} from '../js/constant'
     export default{
         data(){
             return{
@@ -53,6 +57,9 @@
                 http.getNovel().then((res) => {
                     this.tableData = res.data
                 })
+            },
+            download(hash){
+                location.href = DOWNAPI+hash
             }
         },
         created(){

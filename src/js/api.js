@@ -2,8 +2,11 @@
  * Created by cl on 2017/6/29.
  */
 import http from './methods'
-import {NOVELAPI,WEBSITEAPI} from './constant'
+import {NOVELAPI,WEBSITEAPI,DOWNAPI} from './constant'
 export default {
+    downNovel:function(id){
+        return http('GET',DOWNAPI+id)
+    },
     getNovel:function(data,id){
         return http('GET',NOVELAPI+(id||''),data)
     },
